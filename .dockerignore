@@ -1,0 +1,6 @@
+.gitignore
+apis_exercise.md
+assumptions.txt
+./idea
+.circleci
+.github
