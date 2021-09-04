@@ -76,19 +76,19 @@ func (d *DB) Get(code string) (*ProduceItem, error) {
 		return nil, ErrInvalidCode
 	}
 
-	if idx := GetItemIndex(code, d.Produce, d.logger); idx == nil {
+	var idx *int
+	if idx = GetItemIndex(code, d.Produce, d.logger); idx == nil {
 		return &ProduceItem{}, ErrNotFound
-	} else {
-		d.mtx.Lock()
-		defer d.mtx.Unlock()
-		return d.Produce[*idx], nil
 	}
+	d.mtx.Lock()
+	defer d.mtx.Unlock()
+	return d.Produce[*idx], nil
+
 }
 
 // Delete will look  for matching code in db and
 // if found remove the item.  If the produce code is not
 // found in the database an ErrNotFound error is returned.
-
 func (d *DB) Delete(code string) error {
 
 	idx := GetItemIndex(code, d.Produce, d.logger)

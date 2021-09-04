@@ -9,6 +9,7 @@ import (
 	"sync"
 )
 
+// Handler provides access to all handler funcs
 type Handler struct {
 	DB       *DB
 	maxProcs int
@@ -323,7 +324,7 @@ func (h *Handler) AddProduce(w http.ResponseWriter, r *http.Request) {
 		produceProcessors[i] = verifyName(done, verifyCode(done, verifyPrice(done, add(done, resultsStream))))
 	}
 
-	// rs will hold the final consilidated results from all channels
+	// rs will hold the final consolidated results from all channels
 	rs := AddResults{}
 
 	// fanIn used to consolidate all the results to rs

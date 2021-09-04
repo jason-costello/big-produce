@@ -189,28 +189,28 @@ func TestDB_Get(t *testing.T) {
 	db := NewDB(logrus.New())
 
 	logger := logrus.New()
-	testItems := []*ProduceItem{&ProduceItem{
+	testItems := []*ProduceItem{{
 		Name:      "carrot",
 		Code:      "1234-1234-1234-1234",
 		UnitPrice: 1.02,
 	},
-		&ProduceItem{
+		{
 			Name:      "bean",
 			Code:      "2345-2345-2345-2345",
 			UnitPrice: 3.55,
 		},
 		// this item will fail with ErrInvalidCode
-		&ProduceItem{
+		{
 			Name:      "beets",
 			Code:      "234@-2345-2345-2345",
 			UnitPrice: 3.55,
 		},
-		&ProduceItem{
+		{
 			Name:      "corn",
 			Code:      "2341-2!45-2345-2345",
 			UnitPrice: 3.55,
 		},
-		&ProduceItem{
+		{
 			Name:      "corn",
 			Code:      "x",
 			UnitPrice: 3.55,
