@@ -84,7 +84,7 @@ func LoadDB(l *logrus.Logger) (*DB, error) {
 // 	1=PanicLevel,2=FatalLevel,3=ErrorLevel,4=WarnLevel,5=InfoLevel,6=DebugLevel,7=TraceLevel
 // returns pointer to logger
 func loadLogger(logLevelStr string) *logrus.Logger {
-	logLevel, err := strconv.ParseUInt(logLevelStr, 10, 32)
+	logLevel, err := strconv.ParseUint(logLevelStr, 10, 32)
 	if err != nil {
 		logLevel = 3
 	}
