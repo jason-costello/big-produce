@@ -3,10 +3,11 @@ package main
 import (
 	"encoding/json"
 	"errors"
-	"github.com/go-chi/chi/v5"
-	"github.com/sirupsen/logrus"
 	"net/http"
 	"sync"
+
+	"github.com/go-chi/chi/v5"
+	"github.com/sirupsen/logrus"
 )
 
 // Handler provides access to all handler funcs
@@ -50,7 +51,6 @@ func (h *Handler) GetAllProduce(w http.ResponseWriter, r *http.Request) {
 // If no item is found with  that id a 404 error is returned with "item not found" text.
 // If the code is empty a 400 bad request is returned with "verify Produce code" text.
 func (h *Handler) GetProduce(w http.ResponseWriter, r *http.Request) {
-
 	code := chi.URLParam(r, "code")
 
 	p, err := h.DB.Get(code)
@@ -82,7 +82,6 @@ func (h *Handler) GetProduce(w http.ResponseWriter, r *http.Request) {
 // A path variable for the produce code is required.  If the item is not found a 404 is returned.  if the code
 // provided isn't valid a 400 bad request is returned.   If the item is deleted a 204 is returned.
 func (h *Handler) DeleteProduce(w http.ResponseWriter, r *http.Request) {
-
 	code := chi.URLParam(r, "code")
 
 	if err := h.DB.Delete(code); err != nil {

@@ -2,11 +2,6 @@ package main
 
 import (
 	"fmt"
-	"github.com/go-chi/chi/v5"
-	"github.com/go-chi/chi/v5/middleware"
-	"github.com/go-chi/cors"
-	"github.com/sirupsen/logrus"
-
 	"log"
 	"net/http"
 	"os"
@@ -14,12 +9,16 @@ import (
 	"runtime"
 	"strconv"
 	"time"
+
+	"github.com/go-chi/chi/v5"
+	"github.com/go-chi/chi/v5/middleware"
+	"github.com/go-chi/cors"
+	"github.com/sirupsen/logrus"
 )
 
 func main() {
 
 	srv := getServer()
-
 	// start the server
 	if err := srv.ListenAndServe(); err != nil {
 		panic(err)
@@ -81,7 +80,9 @@ func LoadDB(l *logrus.Logger) (*DB, error) {
 // loadLogger - logging level can be set by env var that is an int
 // with a value between 1 and 7.  If not set, value is defaulted to
 // 3, error level logging.
-// 	1=PanicLevel,2=FatalLevel,3=ErrorLevel,4=WarnLevel,5=InfoLevel,6=DebugLevel,7=TraceLevel
+//
+//	1=PanicLevel,2=FatalLevel,3=ErrorLevel,4=WarnLevel,5=InfoLevel,6=DebugLevel,7=TraceLevel
+//
 // returns pointer to logger
 func loadLogger(logLevelStr string) *logrus.Logger {
 	logLevel, err := strconv.ParseUint(logLevelStr, 10, 32)
@@ -133,7 +134,6 @@ func getSrvAddress(address string, port string) string {
 
 // LoadRouter takes in a Handler pointer, sets up the middleware, and builds the routes.
 func LoadRouter(h *Handler) *chi.Mux {
-
 	r := chi.NewRouter()
 
 	cors := cors.New(cors.Options{
